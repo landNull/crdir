@@ -163,6 +163,15 @@ for arg in "$@"; do
   esac
 done
 
+if [ "${1:-}" = "--version" ] || [ "${1:-}" = "-V" ]; then
+  ver="0.1.0"
+  if [ -f "$(dirname "$0")/../VERSION" ]; then
+    ver=$(tr -d ' \n' < "$(dirname "$0")/../VERSION")
+  fi
+  echo "crdir $ver"
+  exit 0
+fi
+
 while getopts 'no:g:m:sh' opt; do
   case $opt in
     n) DRYRUN=1 ;;
